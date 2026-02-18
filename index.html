@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafe Petoo Adda | कैफे पेटू अड्डा – Best Restaurant in Hamirpur, Kanpur</title>
+  <meta name="description" content="Cafe Petoo Adda – Hamirpur's first themed restaurant. Delicious food, awesome ambience, great vibes. Women-owned. Visit us on Jail Road, Cooperganj, Kanpur." />
+  <meta property="og:title" content="Cafe Petoo Adda | कैफे पेटू अड्डा" />
+  <meta property="og:description" content="Hamirpur's finest & first themed restaurant. Top-notch food, great ambience." />
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:url" content="https://cafepetooadda.in" />
+  <meta property="og:image" content="https://picsum.photos/id/1060/1200/630" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --cream: #FAF6EF;
+      --warm-white: #FFF9F2;
+      --terracotta: #C2522D;
+      --burnt-orange: #D4622A;
+      --deep-brown: #2A1810;
+      --medium-brown: #5C3D2E;
+      --gold: #D4A843;
+      --light-gold: #F0C96A;
+      --text-dark: #1A0E08;
+      --text-mid: #5A3E35;
+      --text-light: #9A7B6E;
+      --card-bg: #FFFBF5;
+      --shadow: 0 8px 40px rgba(42,24,16,0.12);
+      --shadow-hover: 0 20px 60px rgba(42,24,16,0.22);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* LOADER */
+    #loader {
+      position: fixed; inset: 0;
+      background: var(--deep-brown);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.6s ease, visibility 0.6s;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-inner { text-align: center; }
+    .loader-logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem; color: var(--gold);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    .loader-dots { display: flex; gap: 8px; justify-content: center; margin-top: 16px; }
+    .loader-dots span {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--terracotta);
+      animation: bounce 1.2s ease-in-out infinite;
+    }
+    .loader-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .loader-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce { 0%,80%,100%{transform:scale(0)} 40%{transform:scale(1)} }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      padding: 0 5%;
+      transition: all 0.4s ease;
+      background: transparent;
+    }
+    nav.scrolled {
+      background: rgba(42,24,16,0.97);
+      backdrop-filter: blur(12px);
+      padding-top: 0;
+      box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 80px;
+    }
+    .nav-logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem; color: var(--gold);
+      text-decoration: none; letter-spacing: 1px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      transition: color 0.3s; position: relative;
+    }
+    .nav-links a::after {
+      content:''; position: absolute; bottom:-4px; left:0;
+      width:0; height:2px; background: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .hamburger {
+      display: none; background: none; border: none;
+      cursor: pointer; flex-direction: column; gap: 5px; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 26px; height: 2px;
+      background: var(--gold); transition: all 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed; top:80px; left:0; right:0;
+      background: rgba(42,24,16,0.98); backdrop-filter: blur(12px);
+      padding: 2rem; z-index: 999;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; }
+    .mobile-menu li { padding: 0.8rem 0; border-bottom: 1px solid rgba(212,168,67,0.2); }
+    .mobile-menu a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 1.1rem; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://picsum.photos/id/1060/1600/900');
+      background-size: cover; background-position: center;
+    }
+    .hero-bg::after {
+      content:''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(42,24,16,0.88) 0%, rgba(92,61,46,0.7) 50%, rgba(194,82,45,0.5) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 2rem;
+      animation: fadeUp 1s ease 0.3s both;
+    }
+    .hero-badge {
+      display: inline-block;
+      border: 1px solid var(--gold); color: var(--gold);
+      padding: 6px 20px; border-radius: 50px;
+      font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 1.5rem; font-weight: 500;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      color: #fff; font-weight: 900;
+      line-height: 1.05; letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+    .hero-title-hindi {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.5rem, 4vw, 2.8rem);
+      color: var(--light-gold);
+      display: block; margin-bottom: 1.5rem;
+    }
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: rgba(255,255,255,0.8);
+      max-width: 520px; margin: 0 auto 2.5rem;
+      line-height: 1.7; font-weight: 300;
+    }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--terracotta); color: #fff;
+      padding: 14px 36px; border-radius: 4px;
+      text-decoration: none; font-weight: 500; font-size: 0.95rem;
+      letter-spacing: 0.5px; transition: all 0.3s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--burnt-orange); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(194,82,45,0.4); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.6); color: #fff;
+      padding: 12px 32px; border-radius: 4px;
+      text-decoration: none; font-weight: 500; font-size: 0.95rem;
+      letter-spacing: 0.5px; transition: all 0.3s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); color: var(--gold); }
+    .hero-stats {
+      position: absolute; bottom: 3rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 3rem; z-index: 2;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold); }
+    .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+    .scroll-indicator {
+      position: absolute; bottom: 1.5rem; right: 5%;
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .scroll-indicator span { font-size: 0.7rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 2px; }
+    .scroll-line { width: 1px; height: 40px; background: rgba(255,255,255,0.3); animation: scrollLine 2s ease-in-out infinite; }
+    @keyframes scrollLine { 0%,100%{transform:scaleY(1);opacity:1} 50%{transform:scaleY(0.5);opacity:0.3} }
+
+    /* SECTIONS */
+    section { padding: 100px 5%; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--terracotta); font-weight: 600; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; color: var(--deep-brown);
+      line-height: 1.15; margin-bottom: 1.5rem;
+    }
+    .section-subtitle {
+      color: var(--text-mid); max-width: 600px;
+      font-size: 1.05rem; line-height: 1.8; font-weight: 300;
+    }
+    .divider {
+      width: 60px; height: 3px;
+      background: linear-gradient(90deg, var(--terracotta), var(--gold));
+      margin: 1.5rem 0; border-radius: 2px;
+    }
+
+    /* ABOUT */
+    #about { background: var(--warm-white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center; max-width: 1200px; margin: 0 auto;
+    }
+    .about-img-wrap { position: relative; }
+    .about-img-main {
+      width: 100%; aspect-ratio: 4/5;
+      object-fit: cover; border-radius: 2px;
+      box-shadow: var(--shadow);
+    }
+    .about-img-accent {
+      position: absolute; bottom: -2rem; right: -2rem;
+      width: 55%; aspect-ratio: 1;
+      object-fit: cover; border-radius: 2px;
+      border: 6px solid var(--warm-white);
+      box-shadow: var(--shadow);
+    }
+    .about-badge-float {
+      position: absolute; top: 1.5rem; left: -1.5rem;
+      background: var(--terracotta); color: #fff;
+      padding: 1rem 1.2rem; border-radius: 4px;
+      text-align: center; box-shadow: var(--shadow);
+    }
+    .about-badge-float .big { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; display:block; }
+    .about-badge-float .small { font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; }
+    .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2.5rem; }
+    .about-feature {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 1rem; background: var(--cream);
+      border-radius: 4px; border-left: 3px solid var(--gold);
+    }
+    .about-feature i { color: var(--terracotta); font-size: 1.2rem; margin-top: 2px; flex-shrink:0; }
+    .about-feature strong { display: block; font-size: 0.9rem; margin-bottom: 2px; }
+    .about-feature span { font-size: 0.8rem; color: var(--text-light); }
+
+    /* MENU */
+    #menu { background: var(--cream); }
+    .menu-header { text-align: center; margin-bottom: 4rem; }
+    .menu-header .section-subtitle { margin: 0 auto; }
+    .menu-header .divider { margin: 1.5rem auto; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem; max-width: 1200px; margin: 0 auto;
+    }
+    .menu-card {
+      background: var(--card-bg); border-radius: 4px;
+      overflow: hidden; box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .menu-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .menu-card-img { width:100%; height: 200px; object-fit: cover; }
+    .menu-card-body { padding: 1.4rem; }
+    .menu-card-tag {
+      display: inline-block; font-size: 0.68rem; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--terracotta); font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .menu-card h3 { font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:8px; }
+    .menu-card p { font-size:0.85rem; color:var(--text-light); line-height:1.6; margin-bottom:1rem; }
+    .menu-card-footer { display:flex; align-items:center; justify-content:space-between; }
+    .price { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--terracotta); font-weight:700; }
+    .veg-badge { width:16px; height:16px; border:2px solid #2d8a3e; border-radius:2px; display:flex; align-items:center; justify-content:center; }
+    .veg-badge::after { content:''; width:8px; height:8px; border-radius:50%; background:#2d8a3e; }
+
+    /* GALLERY */
+    #gallery { background: var(--deep-brown); }
+    #gallery .section-title, #gallery .section-label { color: var(--light-gold); }
+    #gallery .section-subtitle { color: rgba(255,255,255,0.6); }
+    #gallery .divider { background: linear-gradient(90deg, var(--gold), var(--terracotta)); }
+    .gallery-header { text-align:center; margin-bottom:3rem; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem; max-width: 1200px; margin: 0 auto;
+    }
+    .gallery-item {
+      overflow: hidden; border-radius: 3px; cursor: pointer;
+      position: relative;
+    }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-column: span 2; }
+    .gallery-item img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.5s ease; min-height: 180px; }
+    .gallery-item:hover img { transform: scale(1.07); }
+    .gallery-item-overlay {
+      position: absolute; inset:0;
+      background: rgba(42,24,16,0);
+      display: flex; align-items:center; justify-content:center;
+      transition: background 0.3s;
+    }
+    .gallery-item:hover .gallery-item-overlay { background: rgba(42,24,16,0.45); }
+    .gallery-item-overlay i { color:#fff; font-size:2rem; opacity:0; transform:scale(0.7); transition: all 0.3s; }
+    .gallery-item:hover .gallery-item-overlay i { opacity:1; transform:scale(1); }
+
+    /* LIGHTBOX */
+    #lightbox {
+      display:none; position:fixed; inset:0;
+      background: rgba(0,0,0,0.92); z-index: 8000;
+      align-items:center; justify-content:center;
+    }
+    #lightbox.active { display:flex; }
+    #lightbox img { max-width:90vw; max-height:85vh; object-fit:contain; border-radius:3px; }
+    #lightbox-close {
+      position:absolute; top:1.5rem; right:2rem;
+      color:#fff; font-size:2rem; cursor:pointer; background:none; border:none;
+    }
+    #lightbox-prev, #lightbox-next {
+      position:absolute; top:50%; transform:translateY(-50%);
+      color:#fff; font-size:2rem; cursor:pointer; background:none; border:none;
+      padding:1rem;
+    }
+    #lightbox-prev { left:1rem; }
+    #lightbox-next { right:1rem; }
+
+    /* TESTIMONIALS */
+    #testimonials { background: var(--warm-white); }
+    .testimonials-header { text-align:center; margin-bottom:4rem; }
+    .testimonials-header .divider { margin: 1.5rem auto; }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+      gap: 2rem; max-width: 1200px; margin: 0 auto;
+    }
+    .testimonial-card {
+      background: var(--card-bg); padding: 2rem;
+      border-radius: 4px; box-shadow: var(--shadow);
+      position: relative; transition: transform 0.3s;
+    }
+    .testimonial-card:hover { transform: translateY(-4px); }
+    .testimonial-card::before {
+      content: '"'; font-family: 'Playfair Display', serif;
+      font-size: 6rem; color: var(--terracotta); opacity: 0.12;
+      position: absolute; top: -1rem; left: 1rem;
+      line-height: 1;
+    }
+    .stars { color: var(--gold); margin-bottom: 1rem; font-size: 0.9rem; }
+    .testimonial-text { color: var(--text-mid); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem; font-style: italic; }
+    .testimonial-author { display:flex; align-items:center; gap: 12px; }
+    .testimonial-author img { width:44px; height:44px; border-radius:50%; object-fit:cover; }
+    .author-name { font-weight:600; font-size:0.9rem; }
+    .author-role { font-size:0.75rem; color:var(--text-light); }
+    .rating-badge {
+      display: inline-flex; align-items:center; gap:6px;
+      background: var(--terracotta); color:#fff;
+      padding: 8px 20px; border-radius:50px;
+      font-size:0.85rem; font-weight:600; margin: 0 auto 3rem;
+      display:flex; width:fit-content; margin:0 auto 3rem;
+    }
+
+    /* CONTACT */
+    #contact { background: var(--cream); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      gap: 4rem; max-width: 1200px; margin: 0 auto; align-items: start;
+    }
+    .contact-info h3 { font-family:'Playfair Display',serif; font-size:1.8rem; margin-bottom:2rem; }
+    .contact-item { display:flex; gap:1rem; margin-bottom:1.5rem; align-items:flex-start; }
+    .contact-icon {
+      width:44px; height:44px; border-radius:50%;
+      background: var(--terracotta); color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.95rem; flex-shrink:0;
+    }
+    .contact-item-text strong { display:block; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-light); margin-bottom:2px; }
+    .contact-item-text a { color:var(--text-dark); text-decoration:none; }
+    .contact-item-text a:hover { color:var(--terracotta); }
+    .hours-grid { display:grid; grid-template-columns:1fr 1fr; gap:4px 1.5rem; margin-top:8px; font-size:0.85rem; color:var(--text-mid); }
+    .contact-form { background: var(--card-bg); padding: 2.5rem; border-radius:4px; box-shadow: var(--shadow); }
+    .contact-form h3 { font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:1.5rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .form-group label { display:block; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-light); margin-bottom:6px; font-weight:600; }
+    .form-group input, .form-group textarea, .form-group select {
+      width:100%; padding:12px 14px;
+      border: 1px solid #E8DDD5; border-radius:3px;
+      background: var(--cream); font-family:'DM Sans',sans-serif;
+      font-size:0.95rem; color:var(--text-dark);
+      transition: border-color 0.3s, box-shadow 0.3s; outline:none;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px rgba(194,82,45,0.1);
+    }
+    .form-group textarea { height: 100px; resize: vertical; }
+    .btn-submit {
+      width:100%; padding:14px; background: var(--terracotta); color:#fff;
+      border:none; border-radius:3px; font-family:'DM Sans',sans-serif;
+      font-size:1rem; font-weight:500; cursor:pointer; letter-spacing:0.5px;
+      transition: all 0.3s;
+    }
+    .btn-submit:hover { background: var(--burnt-orange); transform:translateY(-1px); }
+    .map-container { margin-top: 3rem; border-radius:4px; overflow:hidden; box-shadow: var(--shadow); }
+    .map-container iframe { width:100%; height:320px; border:none; display:block; }
+
+    /* FOOTER */
+    footer {
+      background: var(--deep-brown);
+      padding: 4rem 5% 2rem; color: rgba(255,255,255,0.7);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; max-width: 1200px; margin: 0 auto 3rem;
+    }
+    .footer-brand .nav-logo { font-size: 2rem; display:block; margin-bottom:1rem; }
+    .footer-brand p { font-size:0.88rem; line-height:1.8; max-width: 280px; }
+    .footer-social { display:flex; gap:10px; margin-top:1.5rem; }
+    .social-btn {
+      width:36px; height:36px; border-radius:50%;
+      background: rgba(255,255,255,0.1);
+      display:flex; align-items:center; justify-content:center;
+      color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.9rem;
+      transition: all 0.3s;
+    }
+    .social-btn:hover { background: var(--terracotta); color:#fff; transform:translateY(-2px); }
+    .footer-col h4 { color:#fff; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1.2rem; }
+    .footer-col ul { list-style:none; }
+    .footer-col li { margin-bottom:0.6rem; }
+    .footer-col a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.88rem; transition:color 0.3s; }
+    .footer-col a:hover { color:var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 2rem; text-align:center; font-size:0.82rem;
+      color: rgba(255,255,255,0.4); max-width:1200px; margin:0 auto;
+    }
+    .footer-bottom span { color:var(--gold); }
+
+    /* FLOATING BUTTONS */
+    .whatsapp-btn {
+      position:fixed; bottom:2rem; right:2rem; z-index:999;
+      width:56px; height:56px; border-radius:50%;
+      background: #25D366; color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.6rem; text-decoration:none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      animation: float 3s ease-in-out infinite;
+      transition: transform 0.3s;
+    }
+    .whatsapp-btn:hover { transform: scale(1.1); }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    .back-top {
+      position:fixed; bottom:6rem; right:2rem; z-index:999;
+      width:44px; height:44px; border-radius:50%;
+      background: var(--terracotta); color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1rem; cursor:pointer; border:none;
+      box-shadow: 0 4px 16px rgba(194,82,45,0.4);
+      opacity:0; transition: opacity 0.3s, transform 0.3s;
+      transform: translateY(20px);
+    }
+    .back-top.visible { opacity:1; transform:translateY(0); }
+    .back-top:hover { background: var(--burnt-orange); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+    .fade-in {
+      opacity:0; transform:translateY(25px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+      .gallery-item:nth-child(1) { grid-column: span 2; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .about-img-accent { right: -1rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display:none; }
+      .hamburger { display:flex; }
+      .about-grid { grid-template-columns:1fr; gap:3rem; }
+      .about-img-accent { display:none; }
+      .about-badge-float { left:0; top:1rem; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); }
+      .gallery-item:nth-child(1) { grid-column: span 2; }
+      .gallery-item:nth-child(4) { grid-column: span 1; }
+      .contact-grid { grid-template-columns:1fr; }
+      .footer-grid { grid-template-columns:1fr 1fr; }
+      .hero-stats { gap: 1.5rem; }
+      .form-row { grid-template-columns:1fr; }
+      .about-features { grid-template-columns:1fr; }
+    }
+    @media (max-width: 480px) {
+      section { padding: 70px 5%; }
+      .gallery-grid { grid-template-columns:1fr; }
+      .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-column: span 1; }
+      .hero-stats { display:none; }
+      .footer-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo">Petoo Adda</div>
+    <div class="loader-dots"><span></span><span></span><span></span></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Petoo Adda</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#about" onclick="closeMobile()">About</a></li>
+    <li><a href="#menu" onclick="closeMobile()">Menu</a></li>
+    <li><a href="#gallery" onclick="closeMobile()">Gallery</a></li>
+    <li><a href="#testimonials" onclick="closeMobile()">Reviews</a></li>
+    <li><a href="#contact" onclick="closeMobile()">Contact</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⭐ 4.1 Rating · 112 Reviews · Hamirpur's Finest</div>
+    <h1 class="hero-title">
+      Cafe Petoo Adda
+      <span class="hero-title-hindi">कैफे पेटू अड्डा</span>
+    </h1>
+    <p class="hero-tagline">Hamirpur's First Themed Restaurant — Where Flavour Meets Festivity, Every Single Day.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-primary"><i class="fas fa-utensils"></i> Explore Menu</a>
+      <a href="#contact" class="btn-outline"><i class="fas fa-map-marker-alt"></i> Find Us</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">4.1★</div><div class="stat-label">Google Rating</div></div>
+    <div class="stat"><div class="stat-num">112+</div><div class="stat-label">Happy Reviews</div></div>
+    <div class="stat"><div class="stat-num">#1</div><div class="stat-label">Themed Café</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Good Vibes</div></div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap fade-in">
+      <img class="about-img-main" src="https://picsum.photos/id/1040/700/875" alt="Cafe Petoo Adda interior" />
+      <img class="about-img-accent" src="https://picsum.photos/id/292/400/400" alt="Delicious food" />
+      <div class="about-badge-float">
+        <span class="big">❤️</span>
+        <span class="small">Women<br>Owned</span>
+      </div>
+    </div>
+    <div class="fade-in">
+      <span class="section-label">Our Story</span>
+      <h2 class="section-title">Hamirpur's First Themed Restaurant</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle">Born from a love of flavour and a passion for creating experiences, Cafe Petoo Adda is more than a restaurant — it's your adda, your hangout, your place. We proudly serve the city's most-loved food with top-notch quality, bringing Kanpur-level vibes straight to Hamirpur.</p>
+      <p style="color:var(--text-light);font-size:0.9rem;margin-top:1rem;line-height:1.8;">Whether you're dining in with family, catching up with friends over pizza, or grabbing a quick bite on the go — our themed ambience and flavour-packed menu make every visit unforgettable. As a women-owned business, we take extra pride in every dish we serve.</p>
+      <div class="about-features">
+        <div class="about-feature"><i class="fas fa-palette"></i><div><strong>Themed Ambience</strong><span>Hamirpur's first ever themed dining experience</span></div></div>
+        <div class="about-feature"><i class="fas fa-award"></i><div><strong>Best Quality</strong><span>Top-notch ingredients, crafted with care</span></div></div>
+        <div class="about-feature"><i class="fas fa-truck"></i><div><strong>Dine-in & Delivery</strong><span>Eat in, take away, or no-contact delivery</span></div></div>
+        <div class="about-feature"><i class="fas fa-female"></i><div><strong>Women-Owned</strong><span>Proudly founded and run by women</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-header fade-in">
+    <span class="section-label">What We Serve</span>
+    <h2 class="section-title">Our Signature Menu</h2>
+    <div class="divider"></div>
+    <p class="section-subtitle">From our legendary pizzas to wraps, dosas, and signature beverages — there's something for every petoo (foodie) at our adda.</p>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card fade-in">
+      <img class="menu-card-img" src="https://picsum.photos/id/1080/500/300" alt="Pizza" />
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Bestseller</span>
+        <h3>Petoo Special Pizza</h3>
+        <p>Our signature loaded pizza with the freshest toppings and house-made sauce. Mouth-watering every bite — our most-raved about dish.</p>
+        <div class="menu-card-footer"><span class="price">₹249</span><div class="veg-badge"></div></div>
+      </div>
+    </div>
+    <div class="menu-card fade-in">
+      <img class="menu-card-img" src="https://picsum.photos/id/429/500/300" alt="Paneer Wrap" />
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Fan Favourite</span>
+        <h3>Spicy Paneer Wrap</h3>
+        <p>Crispy, flavour-packed wrap with grilled paneer, fresh veggies and our secret chutney. Available extra spicy on request!</p>
+        <div class="menu-card-footer"><span class="price">₹149</span><div class="veg-badge"></div></div>
+      </div>
+    </div>
+    <div class="menu-card fade-in">
+      <img class="menu-card-img" src="https://picsum.photos/id/326/500/300" alt="Paneer Doda" />
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Chef's Special</span>
+        <h3>Paneer Doda</h3>
+        <p>A signature creation unique to Cafe Petoo Adda — soft cottage cheese cooked in rich masala with secret house spices.</p>
+        <div class="menu-card-footer"><span class="price">₹199</span><div class="veg-badge"></div></div>
+      </div>
+    </div>
+    <div class="menu-card fade-in">
+      <img class="menu-card-img" src="https://picsum.photos/id/431/500/300" alt="Burgers" />
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Must Try</span>
+        <h3>Loaded Cafe Burger</h3>
+        <p>Stacked high with crispy patty, cheese, veggies and our special sauce — the ultimate café-style burger experience.</p>
+        <div class="menu-card-footer"><span class="price">₹169</span><div class="veg-badge"></div></div>
+      </div>
+    </div>
+    <div class="menu-card fade-in">
+      <img class="menu-card-img" src="https://picsum.photos/id/493/500/300" alt="Pasta" />
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Italian Touch</span>
+        <h3>Creamy Masala Pasta</h3>
+        <p>Perfectly al-dente pasta tossed in a rich masala cream sauce with fresh vegetables and herbs. Desi twist, Italian soul.</p>
+        <div class="menu-card-footer"><span class="price">₹179</span><div class="veg-badge"></div></div>
+      </div>
+    </div>
+    <div class="menu-card fade-in">
+      <img class="menu-card-img" src="https://picsum.photos/id/312/500/300" alt="Shakes" />
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Cool Down</span>
+        <h3>Signature Shakes & Coolers</h3>
+        <p>Thick, indulgent milkshakes and refreshing coolers. From classic chocolate to seasonal fruit blends — the perfect companion.</p>
+        <div class="menu-card-footer"><span class="price">₹99</span><div class="veg-badge"></div></div>
+      </div>
+    </div>
+    <div class="menu-card fade-in">
+      <img class="menu-card-img" src="https://picsum.photos/id/452/500/300" alt="Salads" />
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Light Bites</span>
+        <h3>Fresh Garden Salads</h3>
+        <p>Light, crisp and refreshing salads made with farm-fresh greens, toppings and a zesty house dressing.</p>
+        <div class="menu-card-footer"><span class="price">₹129</span><div class="veg-badge"></div></div>
+      </div>
+    </div>
+    <div class="menu-card fade-in">
+      <img class="menu-card-img" src="https://picsum.photos/id/488/500/300" alt="Desserts" />
+      <div class="menu-card-body">
+        <span class="menu-card-tag">Sweet Finish</span>
+        <h3>Petoo Dessert Platter</h3>
+        <p>End your meal on a high note with our decadent dessert selection — brownies, ice cream, and seasonal specials.</p>
+        <div class="menu-card-footer"><span class="price">₹149</span><div class="veg-badge"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-header fade-in">
+    <span class="section-label">Visual Journey</span>
+    <h2 class="section-title">Our Adda in Pictures</h2>
+    <div class="divider"></div>
+    <p class="section-subtitle">A peek into the vibes, the food, and the atmosphere that makes Cafe Petoo Adda truly special.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item fade-in" onclick="openLightbox(0)">
+      <img src="https://picsum.photos/id/1060/800/600" alt="Gallery 1 – Restaurant Ambience" />
+      <div class="gallery-item-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item fade-in" onclick="openLightbox(1)">
+      <img src="https://picsum.photos/id/292/600/400" alt="Gallery 2 – Cafe Interior" />
+      <div class="gallery-item-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item fade-in" onclick="openLightbox(2)">
+      <img src="https://picsum.photos/id/1080/600/400" alt="Gallery 3 – Food Platter" />
+      <div class="gallery-item-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item fade-in" onclick="openLightbox(3)">
+      <img src="https://picsum.photos/id/431/800/400" alt="Gallery 4 – Dining Area" />
+      <div class="gallery-item-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item fade-in" onclick="openLightbox(4)">
+      <img src="https://picsum.photos/id/326/600/400" alt="Gallery 5 – Signature Dish" />
+      <div class="gallery-item-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item fade-in" onclick="openLightbox(5)">
+      <img src="https://picsum.photos/id/488/600/400" alt="Gallery 6 – Desserts" />
+      <div class="gallery-item-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item fade-in" onclick="openLightbox(6)">
+      <img src="https://picsum.photos/id/312/600/400" alt="Gallery 7 – Beverages" />
+      <div class="gallery-item-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item fade-in" onclick="openLightbox(7)">
+      <img src="https://picsum.photos/id/452/600/400" alt="Gallery 8 – Fresh Ingredients" />
+      <div class="gallery-item-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+  <button id="lightbox-prev" onclick="changeLightbox(-1)"><i class="fas fa-chevron-left"></i></button>
+  <img id="lightbox-img" src="" alt="Gallery" />
+  <button id="lightbox-next" onclick="changeLightbox(1)"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header fade-in">
+    <span class="section-label">What People Say</span>
+    <h2 class="section-title">Loved by Hamirpur</h2>
+    <div class="divider"></div>
+    <div class="rating-badge"><i class="fas fa-star"></i> 4.1 / 5 on Google · 112 Reviews</div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Best place in whole Hamirpur to eat and party whether it be with your friends or family. The food is top-notch quality. It has no competition in Hamirpur — its competition is Kanpur!"</p>
+      <div class="testimonial-author">
+        <img src="https://i.pravatar.cc/80?img=12" alt="Vishesh Gupta" />
+        <div><div class="author-name">Vishesh Gupta</div><div class="author-role">Local Guide · 110 reviews</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Wonderful place to have food. Awesome ambience. Really a Petoo Adda! ❤️ The themed setting makes every visit feel special and unique."</p>
+      <div class="testimonial-author">
+        <img src="https://i.pravatar.cc/80?img=25" alt="CA Aditya Jain" />
+        <div><div class="author-name">CA Aditya Jain</div><div class="author-role">7 reviews</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Delicious food, great ambiance, good environment. The pizza is simply mouth-watering and quality is the best in the whole city. Highly recommend!"</p>
+      <div class="testimonial-author">
+        <img src="https://i.pravatar.cc/80?img=45" alt="Bhawana Bhardwaj" />
+        <div><div class="author-name">Bhawana Bhardwaj</div><div class="author-role">6 reviews</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★☆</div>
+      <p class="testimonial-text">"Food was good, just make wraps a little bit spicier! Love the themed ambience and the variety on the menu. One of the go-to places in Hamirpur."</p>
+      <div class="testimonial-author">
+        <img src="https://i.pravatar.cc/80?img=33" alt="Rahul Sharma" />
+        <div><div class="author-name">Rahul Sharma</div><div class="author-role">Google Reviewer</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="text-align:center; margin-bottom:4rem;" class="fade-in">
+    <span class="section-label">Get in Touch</span>
+    <h2 class="section-title">Visit Us at the Adda</h2>
+    <div class="divider" style="margin:1.5rem auto;"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="fade-in">
+      <h3>We'd Love to See You</h3>
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div class="contact-item-text">
+          <strong>Address</strong>
+          F86R+7C4, Jail Road, beside Hari Guest House, next to Peter England Showroom, Bansmandi, Cooperganj, Hamirpur, Kanpur, Uttar Pradesh 208001
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+        <div class="contact-item-text">
+          <strong>Phone</strong>
+          <a href="tel:+917459977150">+91 74599 77150</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-globe"></i></div>
+        <div class="contact-item-text">
+          <strong>Website</strong>
+          <a href="https://cafepetooadda.in" target="_blank">cafepetooadda.in</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+        <div class="contact-item-text">
+          <strong>Business Hours</strong>
+          <div class="hours-grid">
+            <span>Monday – Friday</span><span>10:00 AM – 2:30 PM</span>
+            <span>Saturday</span><span>10:00 AM – 3:00 PM</span>
+            <span>Sunday</span><span>11:00 AM – 2:30 PM</span>
+          </div>
+        </div>
+      </div>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3571.0!2d80.35!3d25.95!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sCafe+Petoo+Adda%2C+Jail+Road%2C+Hamirpur%2C+Kanpur!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="contact-form">
+        <h3>Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Ravi Kumar" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+91 98765 43210" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="Reservation / Inquiry / Feedback" />
+        </div>
+        <div class="form-group">
+          <label>Your Message</label>
+          <textarea placeholder="Tell us what you have in mind…"></textarea>
+        </div>
+        <button class="btn-submit" onclick="handleSubmit()"><i class="fas fa-paper-plane" style="margin-right:8px;"></i>Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#hero" class="nav-logo">Petoo Adda</a>
+      <p>Hamirpur's first themed restaurant — where every meal is an experience, every visit a memory. Women-owned with love.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/917459977150" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Our Food</h4>
+      <ul>
+        <li><a href="#menu">Pizzas</a></li>
+        <li><a href="#menu">Wraps</a></li>
+        <li><a href="#menu">Paneer Dishes</a></li>
+        <li><a href="#menu">Burgers</a></li>
+        <li><a href="#menu">Desserts & Shakes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+917459977150">+91 74599 77150</a></li>
+        <li><a href="https://cafepetooadda.in">cafepetooadda.in</a></li>
+        <li style="color:rgba(255,255,255,0.5);font-size:0.82rem;">Jail Road, Cooperganj,<br>Hamirpur, Kanpur 208001</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 <span>Cafe Petoo Adda</span>. All rights reserved. Made with ❤️ in Hamirpur, Kanpur.
+  </div>
+</footer>
+
+<!-- FLOATING BUTTONS -->
+<a href="https://wa.me/917459977150" class="whatsapp-btn" target="_blank" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<script>
+  // LOADER
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1200);
+  });
+
+  // NAV SCROLL
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('nav');
+    const backTop = document.getElementById('backTop');
+    if (window.scrollY > 80) { nav.classList.add('scrolled'); backTop.classList.add('visible'); }
+    else { nav.classList.remove('scrolled'); backTop.classList.remove('visible'); }
+  });
+
+  // HAMBURGER
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('open');
+  }
+
+  // FADE IN OBSERVER
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // LIGHTBOX
+  const galleryImages = [
+    'https://picsum.photos/id/1060/1200/800',
+    'https://picsum.photos/id/292/1200/800',
+    'https://picsum.photos/id/1080/1200/800',
+    'https://picsum.photos/id/431/1200/800',
+    'https://picsum.photos/id/326/1200/800',
+    'https://picsum.photos/id/488/1200/800',
+    'https://picsum.photos/id/312/1200/800',
+    'https://picsum.photos/id/452/1200/800',
+  ];
+  let currentImg = 0;
+  function openLightbox(idx) {
+    currentImg = idx;
+    document.getElementById('lightbox-img').src = galleryImages[idx];
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function changeLightbox(dir) {
+    currentImg = (currentImg + dir + galleryImages.length) % galleryImages.length;
+    document.getElementById('lightbox-img').src = galleryImages[currentImg];
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') changeLightbox(-1);
+    if (e.key === 'ArrowRight') changeLightbox(1);
+  });
+
+  // FORM SUBMIT
+  function handleSubmit() {
+    const btn = document.querySelector('.btn-submit');
+    btn.innerHTML = '<i class="fas fa-check" style="margin-right:8px;"></i>Message Sent!';
+    btn.style.background = '#2d8a3e';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right:8px;"></i>Send Message';
+      btn.style.background = '';
+    }, 3000);
+  }
+</script>
+</body>
+</html>
